@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "535712503322",
+    "firebase_url": "https://invoicemaker-28638.firebaseio.com",
+    "project_id": "invoicemaker-28638",
+    "storage_bucket": "invoicemaker-28638.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535712503322:android:e14c49c9c23098ec",
+        "android_client_info": {
+          "package_name": "com.example.adity.invoicemaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535712503322-nk83oeggulcd2tde6m8hscbf9mlv8snp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adity.invoicemaker",
+            "certificate_hash": "e6227a0b297becd2da48123d128eb16fd1618d34"
+          }
+        },
+        {
+          "client_id": "535712503322-1dj01ilrn1t5c9425v6h1s40tdq21ia0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwDyINd4RvClq6IyIXVjdyZ7ngrf8dBSQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535712503322-1dj01ilrn1t5c9425v6h1s40tdq21ia0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
