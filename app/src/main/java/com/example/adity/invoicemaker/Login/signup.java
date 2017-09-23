@@ -74,7 +74,12 @@ public class signup extends AppCompatActivity {
 
                 }
                 else {
-                    startActivity(new Intent(signup.this,OTPCheck.class).putExtra("number",no).putExtra("company_name",fn.getText().toString()).putExtra("Email",em).putExtra("Contact_person",repass.getText().toString()).putExtra("password",pwd));
+                    startActivity(new Intent(signup.this,OTPCheck.class)
+                            .putExtra("number",no)
+                            .putExtra("company_name",fn.getText().toString())
+                            .putExtra("Email",em)
+                            .putExtra("Contact_person",repass.getText().toString())
+                            .putExtra("password",pwd));
 
 
                 }

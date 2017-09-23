@@ -26,6 +26,7 @@
         android:layout_marginTop="50dp"
         android:hint="Email"
         android:id="@+id/email"
+        android:padding="10dp"
         android:inputType="textEmailAddress"
         android:background="#fff"
         android:layout_marginLeft="20dp"
@@ -37,6 +38,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:id="@+id/pass"
+        android:padding="10dp"
+
         android:background="#fff"
         android:layout_marginLeft="20dp"
         android:inputType="textPassword"
@@ -56,14 +59,16 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         />
-    <TextView
-        android:id="@+id/forgot"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password?" />
-    <TextView
+
+        <TextView
+            android:id="@+id/forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Forgot Password?" />
+
+        <TextView
         android:id="@+id/signup1"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"

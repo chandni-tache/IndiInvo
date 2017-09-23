@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class LoginResponse {
 
     @SerializedName("error")
-    private boolean error;
+    private String error;
 
     @SerializedName("users")
     private UserLogin users;
@@ -17,11 +17,11 @@ public class LoginResponse {
     @SerializedName("message")
     private String message;
 
-    public boolean isError() {
+    public String getError() {
         return error;
     }
 
-    public void setError(boolean error) {
+    public void setError(String error) {
         this.error = error;
     }
 

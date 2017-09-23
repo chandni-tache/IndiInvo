@@ -1,5 +1,7 @@
 package com.example.adity.invoicemaker.Fragments;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +11,6 @@ import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -43,6 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Boolean doubleBackToExitPressedOnce=false;
@@ -50,7 +52,7 @@ public class NavigationDrawer extends AppCompatActivity
     boolean hasInvoice=true;
     DatabaseReference db;
     ProgressDialog progressdialog;
-    android.support.v4.app.Fragment fragment;
+    Fragment fragment;
     TextView name,email;
     UserLogin userLogin;
 
@@ -59,22 +61,15 @@ public class NavigationDrawer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        permission();
 
-        int permissionCheck1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int permissionCheck2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        if (permissionCheck1 != PackageManager.PERMISSION_GRANTED&&permissionCheck2 != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,  android.Manifest.permission.READ_EXTERNAL_STORAGE
-                    },123);
-        }
-
-        final UserApiInterface apiService = ApiClient.getClient().create(UserApiInterface.class);
+        /*final UserApiInterface apiService = ApiClient.getClient().create(UserApiInterface.class);
 
 
         progressdialog=new ProgressDialog(this);
             progressdialog.setMessage("Please wait..");
-            progressdialog.show();
+            progressdialog.show();*/
          //   chkval();
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,7 +91,7 @@ public class NavigationDrawer extends AppCompatActivity
       //  Bundle extras = getIntent().getExtras();
         Log.e("test","asdcdsvdsvsdv");
      //   Log.e("apikey", extras.getString("apiKey"));
-        SharedPreferences preferences = getSharedPreferences("userData",0);
+       /* SharedPreferences preferences = getSharedPreferences("userData",0);
         String userApiKey = preferences.getString("apiKey","");
         Log.d("apiKey", "======"+userApiKey+"===="+preferences.getString("companyName",""));
 
@@ -109,8 +104,8 @@ public class NavigationDrawer extends AppCompatActivity
                                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                     progressdialog.cancel();
                                     Log.e("response is",response.body().toString());
-                                    boolean error = response.body().isError();
-                                    if(!error){
+                                  //  boolean error = response.body().isError();
+                                    *//*if(!error){
                                         userLogin = response.body().getUsers();
                                        Log.e("response",userLogin.getApiKey() + "---"+ userLogin.getCompanyName()+"---"+ userLogin.getEmail());
 
@@ -135,7 +130,7 @@ public class NavigationDrawer extends AppCompatActivity
                                         Log.e("response",response.body().toString());
                                         Log.e(" user profile",message);
 
-                                    }
+                                    }*//*
                                 }
 
                                 @Override
@@ -148,7 +143,7 @@ public class NavigationDrawer extends AppCompatActivity
                                 }
                             }
 
-        );/*
+        );*//**/
         char let ='A';
       // char let= userLogin.getCompanyName().trim().charAt(0);
         String letter=String.valueOf(let);
@@ -158,7 +153,7 @@ public class NavigationDrawer extends AppCompatActivity
         ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
         int color1 = generator.getRandomColor();
         TextDrawable drawable1=TextDrawable.builder().buildRound(letter.toUpperCase(), color1);
-        image.setImageDrawable(drawable1);*/
+        image.setImageDrawable(drawable1);
 
       // final FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
@@ -209,27 +204,27 @@ public class NavigationDrawer extends AppCompatActivity
         if (id == R.id.profile)
         {
             fragment=new profile();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,fragment).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout,fragment).commit();
         }
 
         else if (id == R.id.invoice) {
-            chkval();
-            if(!hasInvoice) {
+            //chkval();
+           // if(!hasInvoice) {
                 fragment = new invoice_fragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commit();
-            }
-            else
-            {
-                fragment = new InvoiceListFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commit();
+            //}
+            //else
+            //{
+               //fragment = new InvoiceListFragment();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commit();
 
-            }
+            //}
         }
 
 
         else if (id == R.id.vendors) {
             fragment=new vendorfragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,fragment).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout,fragment).commit();
         }
 
 
@@ -245,7 +240,7 @@ public class NavigationDrawer extends AppCompatActivity
 
 
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_layout, fragment);
             ft.commit();
         }
@@ -254,7 +249,7 @@ public class NavigationDrawer extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    void chkval(){
+    /*public void chkval(){
 
 
         db= FirebaseDatabase.getInstance().getReference("Invoice/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -266,11 +261,11 @@ public class NavigationDrawer extends AppCompatActivity
                     hasInvoice=false;
                 if(!hasInvoice) {
                     fragment = new invoice_fragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commitAllowingStateLoss();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commitAllowingStateLoss();
                 }
                 else {
                     fragment = new InvoiceListFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commitAllowingStateLoss();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_layout, fragment).commitAllowingStateLoss();
 
                 }
                 progressdialog.hide();
@@ -284,9 +279,19 @@ public class NavigationDrawer extends AppCompatActivity
         });
 
 
+    }*/
+
+void permission()
+{
+    int permissionCheck1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    int permissionCheck2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+    if (permissionCheck1 != PackageManager.PERMISSION_GRANTED&&permissionCheck2 != PackageManager.PERMISSION_GRANTED ) {
+        ActivityCompat.requestPermissions(this,
+                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,  android.Manifest.permission.READ_EXTERNAL_STORAGE
+                },123);
     }
-
-
+}
 
 }
 

@@ -24,9 +24,6 @@
        android:layout_height="match_parent"
        android:layout_marginTop="?attr/actionBarSize"
        android:id="@+id/fragment_layout">
-
-
-
    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

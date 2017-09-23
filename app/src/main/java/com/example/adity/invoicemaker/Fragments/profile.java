@@ -2,6 +2,7 @@ package com.example.adity.invoicemaker.Fragments;
 
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +85,7 @@ public class profile extends Fragment {
         pd=new ProgressDialog(getActivity());
 
         lv=(ListView)getActivity().findViewById(R.id.lv);
-    CustomListAdapter adapter=new CustomListAdapter(getActivity(),items,imgid);
+        CustomListAdapter adapter=new CustomListAdapter(getActivity(),items,imgid);
         lv.setAdapter(adapter);
         name=(TextView)getActivity().findViewById(R.id.name1);
         email=(TextView)getActivity().findViewById(R.id.email1);
@@ -93,22 +93,22 @@ public class profile extends Fragment {
         iv=(ImageView)getActivity().findViewById(R.id.pic);
      // \\  SharedPreferences preferences =getDefaultSharedPreferences(getActivity());
    //     char let= FirebaseAuth.getInstance().getCurrentUser().getDisplayName().trim().charAt(0);
-        SharedPreferences preferences = this.getActivity().getSharedPreferences("userData",0);
+      //  SharedPreferences preferences = this.getActivity().getSharedPreferences("userData",0);
 
-        String userApiKey = preferences.getString("apiKey","");
-        Log.d("apiKey", "======"+userApiKey);
+       // String userApiKey = preferences.getString("apiKey","");
+        //Log.d("apiKey", "======"+userApiKey);
 
-        String companyName = preferences.getString("companyName","");
-        Log.e("company","---"+companyName+"=="+preferences.getString("email",""));
-       String letter=String.valueOf(companyName.trim().charAt(0));
+        //String companyName = preferences.getString("companyName","");
+        //Log.e("company","---"+companyName+"=="+preferences.getString("email",""));
+       //String letter=String.valueOf(companyName.trim().charAt(0));
      //  String letter = "TEST";
 
 
 
         ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
         int color1 = generator.getRandomColor();
-        TextDrawable drawable1=TextDrawable.builder().buildRound(letter.toUpperCase(), color1);
-        iv.setImageDrawable(drawable1);
+        //TextDrawable drawable1=TextDrawable.builder().buildRound(letter.toUpperCase(), color1);
+        //iv.setImageDrawable(drawable1);
 
 
 
@@ -119,9 +119,9 @@ public class profile extends Fragment {
      //   final FirebaseUser user=auth.getCurrentUser();
 
 
-       name.setText(""+companyName);
+       //name.setText(""+companyName);
 
-        email.setText(""+preferences.getString("email",""));
+        //email.setText(""+preferences.getString("email",""));
 
      /*   if(user.isEmailVerified())
         {
