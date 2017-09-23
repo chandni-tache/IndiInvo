@@ -40,11 +40,11 @@ public class typesofinvoice extends AppCompatActivity {
 
 
         data1.put("type","For Intra state");
-        data1.put("description","(goods traveling within a state)");
+        data1.put("description","(Goods travelling within a state)");
         INTERESTS.add(data1);
 
         data2.put("type","For Inter state");
-        data2.put("description","(goods traveling Between states)");
+        data2.put("description","(Goods travelling between states)");
         INTERESTS.add(data2);
 
         data3.put("type","For Export");

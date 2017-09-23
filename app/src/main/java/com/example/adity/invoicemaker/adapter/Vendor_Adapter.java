@@ -67,9 +67,8 @@ public class Vendor_Adapter extends RecyclerView.Adapter<Vendor_Adapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.v_name);
-           email=(TextView)itemView.findViewById(R.id.v_email);
+            email=(TextView)itemView.findViewById(R.id.v_email);
             itemView.setOnClickListener(this);
-
         }
 
         @Override

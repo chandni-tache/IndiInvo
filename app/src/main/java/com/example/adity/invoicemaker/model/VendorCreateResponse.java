@@ -14,7 +14,7 @@ public class VendorCreateResponse {
     @SerializedName("message")
     private String message;
 
-    @SerializedName("vendor_id")
+    @SerializedName("vendorId")
     private String vendorId;
 
     public boolean isError() {

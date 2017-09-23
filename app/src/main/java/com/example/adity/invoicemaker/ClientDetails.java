@@ -13,7 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.adity.invoicemaker.Fragments.NavigationDrawer;
+import com.example.adity.invoicemaker.Login.MainActivity;
+import com.example.adity.invoicemaker.model.LoginResponse;
 import com.example.adity.invoicemaker.model.VendorCreateResponse;
 import com.example.adity.invoicemaker.rest.ApiClient;
 import com.example.adity.invoicemaker.rest.UserApiInterface;
@@ -22,6 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +56,7 @@ public class ClientDetails extends AppCompatActivity {
     ArrayList<String> str=new ArrayList<String>();
 
     ArrayList<String> states=new ArrayList<>();
+    String userApiKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +78,11 @@ public class ClientDetails extends AppCompatActivity {
         PAN_NO=(EditText)findViewById(R.id.pan);
         Country=(AutoCompleteTextView)findViewById(R.id.Country);
         name.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+
+        SharedPreferences preferences = getSharedPreferences("PROJECT_NAME",android.content.Context.MODE_PRIVATE);
+        userApiKey= preferences.getString("apiKey","");
+
+        Log.d("apiKet",userApiKey);
         STATE.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -155,29 +170,64 @@ public class ClientDetails extends AppCompatActivity {
                 else {
                     pd.setMessage("Please Wait...");
                     pd.show();
-                    mp.put("Phone", Phone);
-                    mp.put("Email", Email);
-                    mp.put("Address1", addline.getText().toString());
-                    mp.put("Address2", addline2.getText().toString());
-                    mp.put("State", STATE.getText().toString());
-                    mp.put("Zip", zip.getText().toString());
-                    mp.put("Phone", Phone);
-                    mp.put("Email", Email);
-                    mp.put("Pan no", pan_no);
-                    mp.put("Gstin", gstin);
-                    mp.put("Country",country);
+                   // mp.put("Phone", Phone);
 
 
-                    SharedPreferences preferences = getSharedPreferences("userData",0);
-                    String userApiKey = preferences.getString("apiKey","");
+                    HashMap<String,String> jsonObject=new HashMap<>();
+
+                    //    JSONObject jsonObject=new JSONObject();
+
+                        jsonObject.put("vendorName",Name);
+                        jsonObject.put("email",Email);
+                        jsonObject.put("address1",addline.getText().toString());
+                        jsonObject.put("address2",addline2.getText().toString());
+                        jsonObject.put("state",STATE.getText().toString());
+                        jsonObject.put("zipCode",zip.getText().toString());
+                        jsonObject.put("phoneNo",Phone);
+                        jsonObject.put("panNo",pan_no);
+                        jsonObject.put("gstin",gstin);
+                        jsonObject.put("country",country);
+
+                     //   hmap= CodeBase.jsonToMap(jsonObject);
+
+                    Log.d("create vendr",jsonObject.toString());
+
+
+
                     final VendorApiInterface apiService = ApiClient.getClient().create(VendorApiInterface.class);
-                    Call<VendorCreateResponse> addVendorResponse = apiService.addVendor(userApiKey, mp);
+                    Call<VendorCreateResponse> addVendorResponse = apiService.addVendor(userApiKey, jsonObject);
+
                     addVendorResponse.enqueue(new Callback<VendorCreateResponse>() {
                         @Override
                         public void onResponse(Call<VendorCreateResponse> call, Response<VendorCreateResponse> response) {
-                            Log.d("response" , response.body().getMessage());
+                            Log.d("fguefhe",call.request().body().toString()+"---"+call.request().headers());
 
-                            pd.hide();
+                         Log.d("TESTTESTTEST",response.body().toString());
+
+
+                            String result="";
+                            try {
+                                 Log.d("resoibse",response.body().getMessage());
+
+                                if(!response.body().isError()){
+
+                                    pd.setMessage(response.body().getMessage());
+                                    pd.hide();
+                                     return;
+
+                                }
+                                else{
+                                    pd.setMessage(response.body().getMessage());
+                                    pd.hide();
+                                    return;
+
+                                }
+                            }catch (Exception e){
+                                Log.d("aaa","No Response IOE="+e);
+                                pd.hide();
+                                return;
+                            }
+
                         }
 
                         @Override
@@ -185,35 +235,6 @@ public class ClientDetails extends AppCompatActivity {
 
                         }
                     });
-
-                   /* DatabaseReference db = FirebaseDatabase.getInstance().getReference("Company");
-                    db.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(Name).setValue(mp, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            pd.hide();
-                        }
-                    });
-
-                    Bundle extras = ClientDetails.this.getIntent().getExtras();
-                    if(extras!=null) {
-                        String act = extras.getString("from");
-                        if (act.equals("zero")) {
-                            Intent i=new Intent();
-                            i.putExtra("name",Name);
-                            i.putExtra("phone",Phone);
-                            i.putExtra("email",Email);
-                            i.putExtra("address1",add1);
-                            i.putExtra("address2",add2);
-                            i.putExtra("State",st);
-                            i.putExtra("Zip",zp);
-                            i.putExtra("gstin",gstin);
-                            i.putExtra("pan",pan_no);
-                            i.putExtra("Country",country);
-                            i.putExtra("Client","1");
-                            setResult(3,i);
-                        }
-                    }*/
-
 
                     finish();
                 }
@@ -246,7 +267,6 @@ public class ClientDetails extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            Toast.makeText(MainActivity.this, ""+Countries.get(0), Toast.LENGTH_SHORT).show();
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(ClientDetails.this, android.R.layout.simple_expandable_list_item_1, obj.string);
             Country.setAdapter(adapter);
 

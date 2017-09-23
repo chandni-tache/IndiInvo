@@ -67,18 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        SharedPreferences preferences = getSharedPreferences("userData",0);
+        SharedPreferences preferences = getSharedPreferences("PROJECT_NAME",android.content.Context.MODE_PRIVATE);
         String userApiKey = preferences.getString("apiKey","");
         Log.d("apikey",userApiKey);
+
        // Toast.makeText(getApplicationContext(), userApiKey, Toast.LENGTH_LONG).show();
-       /* if(userApiKey!=null){
+        if(userApiKey!=null){
             Intent i=new Intent(MainActivity.this,NavigationDrawer.class);
-            //  i.putExtra("apiKey",list.getApiKey());
-            //i.putExtra("email",em);
+//            //  i.putExtra("apiKey",list.getApiKey());
+//            //i.putExtra("email",em);
             startActivity(i);
             finish();
         }
-*/
+
 
         ActionBar a=getSupportActionBar();
         if(a!=null)

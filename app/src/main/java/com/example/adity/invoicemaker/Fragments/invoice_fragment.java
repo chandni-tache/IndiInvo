@@ -37,16 +37,13 @@ public class invoice_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Invoice");
 
-          /*  Button invoice = (Button) getActivity().findViewById(R.id.createinvoice);
+            Button invoice = (Button) getActivity().findViewById(R.id.createinvoice);
             invoice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(getActivity(), typesofinvoice.class));
                 }
             });
-*/
-
-
 
     }
 

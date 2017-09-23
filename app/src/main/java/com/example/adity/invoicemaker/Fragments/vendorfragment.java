@@ -284,10 +284,10 @@ public class vendorfragment extends Fragment implements com.example.adity.invoic
     public void Read()
     {
 
-        SharedPreferences preferences = this.getActivity().getSharedPreferences("userData",0);
 
-        String userApiKey = preferences.getString("apiKey","");
-        userApiKey = "0f864efe243ac66ebd149b69cfc1fe6a";
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("PROJECT_NAME",android.content.Context.MODE_PRIVATE);
+      String  userApiKey= preferences.getString("apiKey","");
+
 
         final VendorApiInterface apiService = ApiClient.getClient().create(VendorApiInterface.class);
         Call<VendorListResponse> vendorListResponseCall =  apiService.getAllVendors(userApiKey);
@@ -298,6 +298,7 @@ public class vendorfragment extends Fragment implements com.example.adity.invoic
                 Log.d("response",response.body().toString());
                 List<VendorDetails> vendorDetailsList = response.body().getVendorDetailsList();
                 Log.d("NO of venfors" ,vendorDetailsList.get(0).getEmail());
+
                 for(VendorDetails v: vendorDetailsList){
                     arrayList.add(v);
                 }

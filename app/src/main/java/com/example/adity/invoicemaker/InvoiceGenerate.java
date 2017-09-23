@@ -160,7 +160,7 @@ public class InvoiceGenerate extends AppCompatActivity {
         }
 
 
-        //To get the default sign given by user
+       /* //To get the default sign given by user
         DatabaseReference db=FirebaseDatabase.getInstance().getReference("defaultsign/");
         db.addListenerForSingleValueEvent(new ValueEventListener()
         {
@@ -189,10 +189,10 @@ public class InvoiceGenerate extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 //to get default stamp
-         db=FirebaseDatabase.getInstance().getReference("defaultstamp/");
+      /*   db=FirebaseDatabase.getInstance().getReference("defaultstamp/");
         db.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
@@ -220,10 +220,10 @@ public class InvoiceGenerate extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         //TO decode set Invoice Id
-        db=FirebaseDatabase.getInstance().getReference("Invoice/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
+     /*   db=FirebaseDatabase.getInstance().getReference("Invoice/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -259,10 +259,10 @@ public class InvoiceGenerate extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 //forvendordetailsno
-        db = FirebaseDatabase.getInstance().getReference("Company/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
+       /* db = FirebaseDatabase.getInstance().getReference("Company/"+FirebaseAuth.getInstance().getCurrentUser().getUid());
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -302,7 +302,7 @@ public class InvoiceGenerate extends AppCompatActivity {
 
             }
         });
-
+*/
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -331,7 +331,7 @@ public class InvoiceGenerate extends AppCompatActivity {
         Discount1=(TextView)findViewById(R.id.discount1);
         total=(TextView)findViewById(R.id.total);
 
-
+/*
         //To get company logo
         DatabaseReference db2=FirebaseDatabase.getInstance().getReference("CompanyLogo/"+FirebaseAuth.getInstance().getCurrentUser().getUid()+"/Companylogo");
         db2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -397,7 +397,7 @@ public class InvoiceGenerate extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 /**

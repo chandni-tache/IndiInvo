@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class VendorDetails {
 
-    @SerializedName("id")
+    @SerializedName("vendorId")
     private String id;
 
-    @SerializedName("name")
+    @SerializedName("vendorName")
     private String name;
 
     @SerializedName("email")
